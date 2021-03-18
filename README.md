@@ -1,5 +1,8 @@
 # Sport_Town
+JavaScript OOP class based Application <br />
+<br />
 Set your next sport workout location in your town and save it with this nice web app.
+
 
 ## How it works:
 1- Select where do you like to do your next workout on the map. <br />
