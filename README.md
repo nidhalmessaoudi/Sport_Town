@@ -2,6 +2,6 @@
 Set your next sport workout location in your town and save it with this nice web app.
 
 ## How it works:
-1- Select where do you like to do your next workout on the map.
-2- Set the workout with your goal. Ex:{Type: Running, Distance: 3km, Duration: 20mn, Cadence: 150s/m}
-3- Save it and it will appear in the sidebar and also in the map.
+1- Select where do you like to do your next workout on the map. \n
+2- Set the workout with your goal. Ex:{Type: Running, Distance: 3km, Duration: 20mn, Cadence: 150s/m} \n
+3- Save it and it will appear in the sidebar and also in the map. \n
