@@ -1,5 +1,5 @@
 # Sport_Town
-JavaScript OOP class based Application <br />
+JavaScript OOP class based Application. <br />
 <br />
 Set your next sport workout location in your town and save it with this nice web app.
 
