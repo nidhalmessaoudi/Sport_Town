@@ -60,6 +60,7 @@ const inputDistance = document.querySelector('.form__input--distance');
 const inputDuration = document.querySelector('.form__input--duration');
 const inputCadence = document.querySelector('.form__input--cadence');
 const inputElevation = document.querySelector('.form__input--elevation');
+const resetBtn = document.querySelector(".reset");
 
 class App {
     #map;
@@ -69,10 +70,20 @@ class App {
 
     constructor () {
 
+        // DISPLAY RESET BUTTON
+        this._displayResetBtn();
+
+        // GET USER'S LOCATION
         this._getPosition();
+
+        // GET DATA FROM LOCAL STORAGE
+        this._getLocalStorage();
+
+        // EVENT HANDLERS
         form.addEventListener("submit", this._newWorkout.bind(this));
         inputType.addEventListener("change", this._toggleElevationField);
         containerWorkouts.addEventListener("click", this._moveToPopup.bind(this));
+        resetBtn.addEventListener("click", this.reset);
 
     }
 
@@ -99,6 +110,11 @@ class App {
 
         // HANDLING CLICKS ON MAP
         this.#map.on("click", this._showForm.bind(this));
+
+        // LOAD MARKERS BASED ON WORKOUTS DATA
+        this.#workouts.forEach(work => {
+            this._renderWorkoutMarker(work);
+        });
 
     }
 
@@ -164,6 +180,19 @@ class App {
 
         // RENDER WORKOUT ON MAP AS MARKER
         this._renderWorkoutMarker(workout);
+
+        // RENDER WORKOUT ON THE LIST
+        this._renderWorkout(workout);
+
+        // HIDE FORM + CLEAR INPUTS
+        this._hideForm();
+
+        // SET LOCAL STORAGE API
+        this._setLocalStorage();
+
+        // DISPLAY DELETE BUTTON
+        this._displayResetBtn();
+
     }
 
     _renderWorkoutMarker (workout) {
@@ -175,12 +204,6 @@ class App {
             closeOnClick: false,
             className: `${workout.type}-popup`
         })).setPopupContent(`${workout.type === "running" ? "🏃‍♂" : "🚴‍♀"} ${workout.description}`).openPopup();
-
-        // RENDER WORKOUT ON THE LIST
-        this._renderWorkout(workout);
-
-        // HIDE FORM + CLEAR INPUTS
-        this._hideForm();
 
     }
 
@@ -242,8 +265,32 @@ class App {
                 duration: 1,
         }
         });
-        workout.click();
+/*        // USING PUBLIC INTERFACE
+        workout.click();*/
 
+    }
+
+    _setLocalStorage () {
+        localStorage.setItem("workouts", JSON.stringify(this.#workouts));
+    }
+
+    _getLocalStorage () {
+        const data = JSON.parse(localStorage.getItem("workouts"));
+        if (!data) return;
+        this.#workouts = data;
+        this.#workouts.forEach(work => {
+           this._renderWorkout(work);
+        });
+    }
+
+    reset () {
+        localStorage.removeItem("workouts");
+        location.reload();
+    }
+
+    _displayResetBtn () {
+        if (!localStorage.getItem("workouts")) return;
+        resetBtn.classList.remove("hidden");
     }
 }
 

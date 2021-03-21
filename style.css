@@ -171,6 +171,26 @@ a:visited {
   display: none;
 }
 
+.reset {
+  margin-bottom: 20px;
+}
+
+.reset-btn {
+  float: right;
+  background-color: var(--color-dark--2);
+  border-radius: 5px;
+  border: 0;
+  padding: 10px;
+  color: var(--color-light--2);
+  font-size: 1.7rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.reset.hidden {
+  display: none;
+}
+
 .copyright {
   margin-top: auto;
   font-size: 1.3rem;
